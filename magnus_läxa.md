@@ -6,4 +6,8 @@
 
 * En ändring till!
 
+* en tredje ändring, inte sista!
+
+* En fjärde!
+
 //Magnus
