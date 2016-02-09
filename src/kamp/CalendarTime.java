@@ -36,4 +36,9 @@ public class CalendarTime {
 		return getDate()+" kl."+getTime();
 	}
 
+	public int compareTo(CalendarTime calendarTime) {
+		return this.time.compareTo(calendarTime.time);
+		
+	}
+
 }

@@ -2,7 +2,7 @@ package kamp;
 
 public class Main {
 
-	public static void main(String[] args)  {
+	public static void main(String[] args) throws Exception  {
 		// TODO Auto-generated method stub
 		CalendarEntry testEntry = new CalendarEntry();
 		System.out.println(testEntry.toString());
@@ -18,7 +18,16 @@ public class Main {
 			// TODO Auto-generated catch block
 			System.out.println("validerar ej "+ e.getMessage());
 		}
-		
+		System.out.println("================================");
+		Calendar calendar = new Calendar();
+		calendar.add(new CalendarEntry("160202", "18:00", "160202", "19:00"));
+		calendar.add(new CalendarEntry("160202", "17:00", "160202", "19:00"));
+		calendar.add(new CalendarEntry("160202", "16:00", "160202", "19:00"));
+		calendar.add(new CalendarEntry("160202", "17:00", "160202", "19:00"));
+		System.out.println(calendar);
+		System.out.println("++++++++++++++++++++++++++++++ +++++ +++");
+		calendar.sort();
+		System.out.println(calendar);
 	}
 
 }

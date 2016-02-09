@@ -1,6 +1,6 @@
 package kamp;
 
-public class CalendarEntry {
+public class CalendarEntry implements Comparable<CalendarEntry> {
 	CalendarTime beginEvent;
 	CalendarTime endEvent;
 
@@ -33,6 +33,13 @@ public class CalendarEntry {
 		if (beginEvent.getTime().compareTo(endEvent.getTime()) > 0) {
 			throw new Exception("end time before begin time!!");
 		}
-		
+
+	}
+
+	@Override
+	public int compareTo(CalendarEntry o) {
+		return beginEvent.compareTo(o.beginEvent);
+		// TODO Auto-generated method stub
+
 	}
 }
