@@ -4,6 +4,7 @@ public class CalendarEntry implements Comparable<CalendarEntry> {
 	CalendarTime beginEvent;
 	CalendarTime endEvent;
 
+	@Deprecated
 	public CalendarEntry() {
 		this.beginEvent = new CalendarTime();
 		this.endEvent = new CalendarTime();
@@ -33,7 +34,11 @@ public class CalendarEntry implements Comparable<CalendarEntry> {
 		if (beginEvent.getTime().compareTo(endEvent.getTime()) > 0) {
 			throw new Exception("end time before begin time!!");
 		}
-
+		
+	}
+	public int inside(CalendarTime time){
+		if (beginEvent.compareTo(time)>0);
+		return 0;
 	}
 
 	@Override

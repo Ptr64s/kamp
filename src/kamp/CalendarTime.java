@@ -35,8 +35,15 @@ public class CalendarTime {
 	public String toString(){
 		return getDate()+" kl."+getTime();
 	}
-
+	
+	// fredriksCalendertime.compareTo(andersCalenderTime)
+	
+	//anders
+	
 	public int compareTo(CalendarTime calendarTime) {
+		if (this.date.compareTo(calendarTime.date) != 0) {
+			return this.date.compareTo(calendarTime.date);
+		}
 		return this.time.compareTo(calendarTime.time);
 		
 	}
