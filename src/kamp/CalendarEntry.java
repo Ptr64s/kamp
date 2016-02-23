@@ -1,67 +1,83 @@
 package kamp;
 
 public class CalendarEntry implements Comparable<CalendarEntry> {
-	CalendarTime beginEvent;
-	CalendarTime endEvent;
+	private CalendarTime beginEvent;
+	private CalendarTime endEvent;
 
 	@Deprecated
 	public CalendarEntry() {
-		this.beginEvent = new CalendarTime();
-		this.endEvent = new CalendarTime();
+		this.setBeginEvent(new CalendarTime());
+		this.setEndEvent(new CalendarTime());
 
 	}
 
 	public CalendarEntry(CalendarTime newBeginEvent, CalendarTime newEndEvent) {
-		this.beginEvent = newBeginEvent;
-		this.endEvent = newEndEvent;
+		this.setBeginEvent(newBeginEvent);
+		this.setEndEvent(newEndEvent);
 	}
 
 	public CalendarEntry(String calendarStartDate, String calendarStartTime, String calendarEndDate,
 			String calendarEndTime) throws Exception {
-		this.beginEvent = new CalendarTime(calendarStartDate, calendarStartTime);
-		this.endEvent = new CalendarTime(calendarEndDate, calendarEndTime);
+		this.setBeginEvent(new CalendarTime(calendarStartDate, calendarStartTime));
+		this.setEndEvent(new CalendarTime(calendarEndDate, calendarEndTime));
 		validate();
 	}
 
 	public String toString() {
-		return beginEvent.toString() + " - " + endEvent.toString();
+		return getBeginEvent().toString() + " - " + getEndEvent().toString();
 	}
 
 	public void validate() throws Exception {
-		if (beginEvent.getDate().compareTo(endEvent.getDate()) > 0) {
+		if (getBeginEvent().getDate().compareTo(getEndEvent().getDate()) > 0) {
 			throw new Exception("end date before begin date!!");
 		}
-		if (beginEvent.getDate().compareTo(endEvent.getDate()) == 0) {
-			if (beginEvent.getTime().compareTo(endEvent.getTime()) > 0) {
+		if (getBeginEvent().getDate().compareTo(getEndEvent().getDate()) == 0) {
+			if (getBeginEvent().getTime().compareTo(getEndEvent().getTime()) > 0) {
 				throw new Exception("end time before begin time!!");
 			}
 		}
 		
 	}
 	
-	public boolean before(CalendarTime time){
-		if (time.compareTo(beginEvent)>0)
+	public boolean startsBefore(CalendarTime time){
+		if (time.compareTo(getBeginEvent())<0)
 			return false;
 		return true;
 	}
 	
-	public boolean after(CalendarTime time){
-		if (time.compareTo(endEvent)<0)
+	public boolean endsAfter(CalendarTime time){
+		if (time.compareTo(getEndEvent())>0)
 			return false;
 		return true;
 	}
 	public boolean inside(CalendarTime time){
-		if (before(time) || after(time))
-			return false;
-		return true;
+		if (startsBefore(time) && endsAfter(time))
+			return true;
+		return false;
 	}
 	
 	
 
 	@Override
 	public int compareTo(CalendarEntry o) {
-		return beginEvent.compareTo(o.beginEvent);
+		return getBeginEvent().compareTo(o.getBeginEvent());
 		// TODO Auto-generated method stub
 
+	}
+
+	public CalendarTime getBeginEvent() {
+		return beginEvent;
+	}
+
+	public void setBeginEvent(CalendarTime beginEvent) {
+		this.beginEvent = beginEvent;
+	}
+
+	public CalendarTime getEndEvent() {
+		return endEvent;
+	}
+
+	public void setEndEvent(CalendarTime endEvent) {
+		this.endEvent = endEvent;
 	}
 }
