@@ -31,15 +31,32 @@ public class CalendarEntry implements Comparable<CalendarEntry> {
 		if (beginEvent.getDate().compareTo(endEvent.getDate()) > 0) {
 			throw new Exception("end date before begin date!!");
 		}
-		if (beginEvent.getTime().compareTo(endEvent.getTime()) > 0) {
-			throw new Exception("end time before begin time!!");
+		if (beginEvent.getDate().compareTo(endEvent.getDate()) == 0) {
+			if (beginEvent.getTime().compareTo(endEvent.getTime()) > 0) {
+				throw new Exception("end time before begin time!!");
+			}
 		}
 		
 	}
-	public int inside(CalendarTime time){
-		if (beginEvent.compareTo(time)>0);
-		return 0;
+	
+	public boolean before(CalendarTime time){
+		if (time.compareTo(beginEvent)>0)
+			return false;
+		return true;
 	}
+	
+	public boolean after(CalendarTime time){
+		if (time.compareTo(endEvent)<0)
+			return false;
+		return true;
+	}
+	public boolean inside(CalendarTime time){
+		if (before(time) || after(time))
+			return false;
+		return true;
+	}
+	
+	
 
 	@Override
 	public int compareTo(CalendarEntry o) {
