@@ -16,4 +16,9 @@ public class CalendarEntryTest {
 		CalendarEntry calendarEntry = new CalendarEntry("160301", "20:00", "160301", "19:00");
 		
 	}
+	@Test(expected=Exception.class)
+	public void doNotAllowStartDateAfterEndDate() throws Exception {
+		CalendarEntry calendarEntry = new CalendarEntry("160302", "18:00", "160301", "19:00");
+	}
+	
 }

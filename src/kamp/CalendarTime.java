@@ -2,7 +2,7 @@ package kamp;
 
 import java.util.Calendar;
 
-public class CalendarTime {
+public class CalendarTime implements Comparable<CalendarTime> {
 	private String date;
 	private String time;
 
@@ -36,10 +36,12 @@ public class CalendarTime {
 		return getDate()+" kl."+getTime();
 	}
 	
+//	public boolean equal
+	
 	// fredriksCalendertime.compareTo(andersCalenderTime)
 	
 	//anders
-	
+	@Override
 	public int compareTo(CalendarTime calendarTime) {
 		if (this.date.compareTo(calendarTime.date) != 0) {
 			return this.date.compareTo(calendarTime.date);
