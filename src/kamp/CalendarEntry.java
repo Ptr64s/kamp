@@ -5,15 +5,17 @@ public class CalendarEntry implements Comparable<CalendarEntry> {
 	private CalendarTime endEvent;
 
 	@Deprecated
-	public CalendarEntry() {
+	public CalendarEntry() throws Exception {
 		this.setBeginEvent(new CalendarTime());
 		this.setEndEvent(new CalendarTime());
+		validate();
 
 	}
 
-	public CalendarEntry(CalendarTime newBeginEvent, CalendarTime newEndEvent) {
+	public CalendarEntry(CalendarTime newBeginEvent, CalendarTime newEndEvent) throws Exception {
 		this.setBeginEvent(newBeginEvent);
 		this.setEndEvent(newEndEvent);
+		validate();
 	}
 
 	public CalendarEntry(String calendarStartDate, String calendarStartTime, String calendarEndDate,
