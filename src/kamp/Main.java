@@ -18,7 +18,7 @@ public class Main {
 		System.out.println(new CalendarEntry("160202", "17:00", "160202", "21:00").inside(new CalendarTime("160202", "22:00")));
 	}
 
-	private static void oldStuff() {
+	private static void oldStuff() throws Exception {
 		// TODO Auto-generated method stub
 		CalendarEntry testEntry = new CalendarEntry();
 		System.out.println(testEntry.toString());
