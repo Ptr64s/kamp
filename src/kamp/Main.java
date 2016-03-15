@@ -5,11 +5,11 @@ public class Main {
 	public static void main(String[] args) throws Exception  {
 		//oldStuff();
 		//System.out.println("================================");
-		Calendar calendar = new Calendar();
-		calendar.add(new CalendarEntry("160203", "18:00", "160204", "17:00"));
-		calendar.add(new CalendarEntry("160204", "17:00", "160204", "19:00"));
-		calendar.add(new CalendarEntry("160202", "16:00", "160202", "20:00"));
-		calendar.add(new CalendarEntry("160202", "17:00", "160202", "21:00"));
+		CollissionFreeCalendar calendar = new CollissionFreeCalendar();
+		calendar.add(new CalendarEntry("160205", "16:00", "160205", "21:00"));
+		calendar.add(new CalendarEntry("160205", "22:00", "160205", "23:00"));
+		//calendar.add(new CalendarEntry("160205", "18:00", "160205", "19:00"));
+
 		System.out.println(calendar);
 		System.out.println("++++++++++++++++++++++++++++++ +++++ +++");
 		calendar.sort();

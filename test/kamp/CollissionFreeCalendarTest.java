@@ -38,9 +38,9 @@ public class CollissionFreeCalendarTest {
 		
 		List<CalendarEntry> cnstrCalendar = calendar.getEntries();
 		
-		assertThat(cnstrCalendar.size(), equalTo(2));
 		assertThat(cnstrCalendar.get(0).toString(), equalTo("160202 kl.18:00 - 160202 kl.19:00") );
 		assertThat(cnstrCalendar.get(1).toString(), equalTo("160202 kl.20:00 - 160204 kl.21:00") );
+		assertThat(cnstrCalendar.size(), equalTo(2));
 
 	}
 

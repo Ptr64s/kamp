@@ -47,6 +47,14 @@ public class CalendarEntry implements Comparable<CalendarEntry> {
 		return true;
 	}
 	
+	
+	//prövar att skriva en ny metod - ej testad
+	public boolean startsAfter(CalendarTime time){
+		if (time.compareTo(getBeginEvent())>0)
+			return false;
+		return true;
+	}
+	
 	public boolean endsAfter(CalendarTime time){
 		if (time.compareTo(getEndEvent())>0)
 			return false;
