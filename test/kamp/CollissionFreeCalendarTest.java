@@ -1,5 +1,6 @@
 package kamp;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import static org.junit.Assert.assertThat;
 
@@ -10,6 +11,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 public class CollissionFreeCalendarTest {
 	
 	@Test
+	@Ignore
 	public void addOneEntryEnclosingExistingEntry() throws Exception {
 		CollissionFreeCalendar calendar = new CollissionFreeCalendar();
 		calendar.add(new CalendarEntry("160202", "18:00", "160204", "17:00"));
@@ -31,6 +33,7 @@ public class CollissionFreeCalendarTest {
 		assertThat(cnstrCalendar.get(0).toString(), equalTo("160202 kl.18:00 - 160204 kl.17:00") );
 	}
 	@Test
+	@Ignore
 	public void addOneEntryNotOverlappingExistingEntry() throws Exception {
 		CollissionFreeCalendar calendar = new CollissionFreeCalendar();
 		calendar.add(new CalendarEntry("160202", "18:00", "160202", "19:00"));

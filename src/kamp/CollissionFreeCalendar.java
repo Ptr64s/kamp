@@ -1,5 +1,8 @@
 package kamp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CollissionFreeCalendar extends Calendar {
 
 	@Override
@@ -70,12 +73,35 @@ public class CollissionFreeCalendar extends Calendar {
 	}
 	
 	public void add2(CalendarEntry newEntry) {
-		// TODO Auto-generated method stub
-		if(calendar.isEmpty()) {
-			super.add(newEntry);
-		} 
-		else{
+		// vi måste skapa intersects-metoden
+		
+			List<CalendarEntry> tempColissionFreeCalendar = new ArrayList<CalendarEntry>();
+			List<CalendarEntry> tempColissionCalendar = new ArrayList<CalendarEntry>();
+			tempColissionCalendar.add(newEntry);
+			for (CalendarEntry entry:calendar) {
+				if (entry.intersects(newEntry)) {
+					tempColissionCalendar.add(entry);
+				} else {
+					tempColissionFreeCalendar.add(entry);
+				}
+			}
+			CalendarTime tempStart = null;
+			CalendarTime tempEnd = null;
 			
+			for (CalendarEntry entry:tempColissionCalendar) {
+				if (tempStart == null || tempStart.compareTo(entry.getBeginEvent())> 0) {
+					tempStart = entry.getBeginEvent(); 
+				}
+				if (tempEnd == null || tempEnd.compareTo(entry.getEndEvent())< 0) {
+					tempEnd = entry.getEndEvent(); 
+				}
+			}
+			CalendarEntry tempEntry = new CalendarEntry(tempStart, tempEnd);
+				tempColissionFreeCalendar.add(tempEntry);
+				calendar = tempColissionFreeCalendar;
+				
+				
+				
 /*			för varje entry i calendar: testa om det överlappar med newEntry
 				Om det inte överlappar - hoppa till nästa entry i calendar
 				Om det överlappar - hoppa till "så länge som det överlappar"
@@ -150,7 +176,7 @@ public class CollissionFreeCalendar extends Calendar {
 			}
 			
 			
-		}	
+			
 		
 		
 	}
