@@ -98,11 +98,7 @@ public class CalendarEntry implements Comparable<CalendarEntry> {
 	public boolean intersects(CalendarEntry entry){
 		if(startsAfter(entry.getEndEvent()) || entry.startsAfter(getEndEvent()))
 			return false;
-		
-//		if(contains(entry.getBeginEvent()) || contains(entry.getEndEvent()))
-//			return true;
-//		if(entry.contains(getBeginEvent()))
-//			return true;
+
 		return true;
 	}
 }
