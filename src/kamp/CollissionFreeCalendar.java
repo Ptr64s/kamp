@@ -72,7 +72,7 @@ public class CollissionFreeCalendar extends Calendar {
 		
 	}
 	
-	public void add2(CalendarEntry newEntry) {
+	public void add2(CalendarEntry newEntry) throws Exception {
 		// vi måste skapa intersects-metoden
 		
 			List<CalendarEntry> tempColissionFreeCalendar = new ArrayList<CalendarEntry>();

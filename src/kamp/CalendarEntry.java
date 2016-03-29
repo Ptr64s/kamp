@@ -50,17 +50,21 @@ public class CalendarEntry implements Comparable<CalendarEntry> {
 	
 	//prövar att skriva en ny metod - ej testad
 	public boolean startsAfter(CalendarTime time){
-		if (time.compareTo(getBeginEvent())>0)
-			return false;
-		return true;
+		if (getBeginEvent().compareTo(time)>0)
+			return true;
+		return false;
 	}
-	
+	// a.endsAfter(b)
+	// int a.compareTo(b)
+	//     return(a-b)
 	public boolean endsAfter(CalendarTime time){
 		if (time.compareTo(getEndEvent())>0)
 			return false;
 		return true;
 	}
-	public boolean inside(CalendarTime time){
+	
+	
+	public boolean contains(CalendarTime time){
 		if (startsBefore(time) && endsAfter(time))
 			return true;
 		return false;
@@ -89,5 +93,16 @@ public class CalendarEntry implements Comparable<CalendarEntry> {
 
 	public void setEndEvent(CalendarTime endEvent) {
 		this.endEvent = endEvent;
+	}
+	
+	public boolean intersects(CalendarEntry entry){
+		if(startsAfter(entry.getEndEvent()) || entry.startsAfter(getEndEvent()))
+			return false;
+		
+//		if(contains(entry.getBeginEvent()) || contains(entry.getEndEvent()))
+//			return true;
+//		if(entry.contains(getBeginEvent()))
+//			return true;
+		return true;
 	}
 }

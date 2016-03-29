@@ -15,7 +15,7 @@ public class Main {
 		calendar.sort();
 		System.out.println(calendar);
 		//System.out.println(calendar.calendar.get(2).inside(new CalendarTime("160204", "20:00")));
-		System.out.println(new CalendarEntry("160202", "17:00", "160202", "21:00").inside(new CalendarTime("160202", "22:00")));
+		System.out.println(new CalendarEntry("160202", "17:00", "160202", "21:00").contains(new CalendarTime("160202", "22:00")));
 	}
 
 	private static void oldStuff() throws Exception {
