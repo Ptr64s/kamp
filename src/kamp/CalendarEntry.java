@@ -1,104 +1,88 @@
 package kamp;
 
+import java.time.LocalDateTime;
+
 public class CalendarEntry implements Comparable<CalendarEntry> {
-	private CalendarTime beginEvent;
-	private CalendarTime endEvent;
+	private LocalDateTime beginEvent;
+	private LocalDateTime endEvent;
 
-	@Deprecated
-	public CalendarEntry() throws Exception {
-		this.setBeginEvent(new CalendarTime());
-		this.setEndEvent(new CalendarTime());
-		validate();
+//	@Deprecated
+//	public CalendarEntry() throws Exception {
+//		this.setBeginEvent(new CalendarTime());
+//		this.setEndEvent(new CalendarTime());
+//		validate();
+//
+//	}
 
-	}
-
-	public CalendarEntry(CalendarTime newBeginEvent, CalendarTime newEndEvent) throws Exception {
+	public CalendarEntry(LocalDateTime newBeginEvent, LocalDateTime newEndEvent) throws Exception {
 		this.setBeginEvent(newBeginEvent);
 		this.setEndEvent(newEndEvent);
-		validate();
+		//validate();
 	}
 
-	public CalendarEntry(String calendarStartDate, String calendarStartTime, String calendarEndDate,
-			String calendarEndTime) throws Exception {
-		this.setBeginEvent(new CalendarTime(calendarStartDate, calendarStartTime));
-		this.setEndEvent(new CalendarTime(calendarEndDate, calendarEndTime));
-		validate();
-	}
+//	public CalendarEntry(String calendarStartDate, String calendarStartTime, String calendarEndDate,
+//			String calendarEndTime) throws Exception {
+//		this.setBeginEvent(new CalendarTime(calendarStartDate, calendarStartTime));
+//		this.setEndEvent(new CalendarTime(calendarEndDate, calendarEndTime));
+//		validate();
+//	}
 
 	public String toString() {
 		return getBeginEvent().toString() + " - " + getEndEvent().toString();
 	}
 
-	public void validate() throws Exception {
-		if (getBeginEvent().getDate().compareTo(getEndEvent().getDate()) > 0) {
-			throw new Exception("end date before begin date!!");
-		}
-		if (getBeginEvent().getDate().compareTo(getEndEvent().getDate()) == 0) {
-			if (getBeginEvent().getTime().compareTo(getEndEvent().getTime()) > 0) {
-				throw new Exception("end time before begin time!!");
-			}
-		}
-		
+//	public void validate() throws Exception {
+//		if (getBeginEvent().getDate().compareTo(getEndEvent().getDate()) > 0) {
+//			throw new Exception("end date before begin date!!");
+//		}
+//		if (getBeginEvent().getDate().compareTo(getEndEvent().getDate()) == 0) {
+//			if (getBeginEvent().getTime().compareTo(getEndEvent().getTime()) > 0) {
+//				throw new Exception("end time before begin time!!");
+//			}
+//		}
+//		
+//	}
+	
+	public boolean startsBefore(LocalDateTime time){
+		return time.isAfter(beginEvent);
 	}
 	
-	public boolean startsBefore(CalendarTime time){
-		if (time.compareTo(getBeginEvent())<0)
-			return false;
-		return true;
+	public boolean startsAfter(LocalDateTime time) {
+		return time.isBefore(beginEvent);
 	}
 	
-	
-	//prövar att skriva en ny metod - ej testad
-	public boolean startsAfter(CalendarTime time){
-		if (getBeginEvent().compareTo(time)>0)
-			return true;
-		return false;
-	}
-	// a.endsAfter(b)
-	// int a.compareTo(b)
-	//     return(a-b)
-	public boolean endsAfter(CalendarTime time){
-		if (time.compareTo(getEndEvent())>0)
-			return false;
-		return true;
+	// calenderEntry.endsAfter(time)
+	public boolean endsAfter(LocalDateTime time) {
+		return time.isBefore(endEvent);
 	}
 	
-	
-	public boolean contains(CalendarTime time){
-		if (startsBefore(time) && endsAfter(time))
-			return true;
-		return false;
+	public boolean contains(LocalDateTime time){
+		return startsBefore(time) && endsAfter(time);
 	}
-	
-	
 
 	@Override
 	public int compareTo(CalendarEntry o) {
 		return getBeginEvent().compareTo(o.getBeginEvent());
-		// TODO Auto-generated method stub
-
 	}
 
-	public CalendarTime getBeginEvent() {
+	public LocalDateTime getBeginEvent() {
 		return beginEvent;
 	}
 
-	public void setBeginEvent(CalendarTime beginEvent) {
+	public void setBeginEvent(LocalDateTime beginEvent) {
 		this.beginEvent = beginEvent;
 	}
 
-	public CalendarTime getEndEvent() {
+	public LocalDateTime getEndEvent() {
 		return endEvent;
 	}
 
-	public void setEndEvent(CalendarTime endEvent) {
+	public void setEndEvent(LocalDateTime endEvent) {
 		this.endEvent = endEvent;
 	}
 	
-	public boolean intersects(CalendarEntry entry){
-		if(startsAfter(entry.getEndEvent()) || entry.startsAfter(getEndEvent()))
-			return false;
-
-		return true;
+	public boolean intersects(CalendarEntry entry) {
+		return beginEvent.isBefore(entry.getEndEvent()) && entry.getBeginEvent().isBefore(endEvent);
 	}
-}
+
+};
