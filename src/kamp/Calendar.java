@@ -7,27 +7,27 @@ import java.util.Collections;
 import java.util.List;
 
 public class Calendar {
-	List<Period> calendar;
+	List<CalendarEntry> calendar;
 
 	public Calendar() {
 		calendar = new ArrayList<>();
 	}
 	
-	public Calendar(List<Period> newCalendar) {
+	public Calendar(List<CalendarEntry> newCalendar) {
 		this.calendar = newCalendar;
 	}
 
-	public void add(Period calendarEntry) throws Exception {
+	public void add(CalendarEntry calendarEntry) throws Exception {
 		calendar.add(calendarEntry);
 	}
-	List<Period> getEntries() {
+	List<CalendarEntry> getEntries() {
 		Duration d;
 		return this.calendar;
 	}
 
 	public String toString() {
 		String result = "";
-		for (Period entry : calendar) {
+		for (CalendarEntry entry : calendar) {
 			result = result + entry.toString() + "\n";
 		}
 		return result;

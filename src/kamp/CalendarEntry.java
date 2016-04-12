@@ -1,8 +1,13 @@
 package kamp;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class CalendarEntry implements Comparable<CalendarEntry> {
+	
+	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMddHH:mm");
+	private static DateTimeFormatter toStringFormatter = DateTimeFormatter.ofPattern("yyMMdd' kl.'HH:mm");
+	
 	private LocalDateTime beginEvent;
 	private LocalDateTime endEvent;
 
@@ -17,31 +22,27 @@ public class CalendarEntry implements Comparable<CalendarEntry> {
 	public CalendarEntry(LocalDateTime newBeginEvent, LocalDateTime newEndEvent) throws Exception {
 		this.setBeginEvent(newBeginEvent);
 		this.setEndEvent(newEndEvent);
-		//validate();
+		validate();
 	}
-
-//	public CalendarEntry(String calendarStartDate, String calendarStartTime, String calendarEndDate,
-//			String calendarEndTime) throws Exception {
-//		this.setBeginEvent(new CalendarTime(calendarStartDate, calendarStartTime));
-//		this.setEndEvent(new CalendarTime(calendarEndDate, calendarEndTime));
-//		validate();
-//	}
-
+	
+	@Deprecated
+	public CalendarEntry(String calendarStartDate, String calendarStartTime, String calendarEndDate,
+			String calendarEndTime) throws Exception {
+		this(LocalDateTime.parse(calendarStartDate + calendarStartTime, formatter),
+				LocalDateTime.parse(calendarEndDate + calendarEndTime, formatter));
+	}
+	
 	public String toString() {
-		return getBeginEvent().toString() + " - " + getEndEvent().toString();
+		
+		return toStringFormatter.format(beginEvent) + " - " + toStringFormatter.format(endEvent);
 	}
 
-//	public void validate() throws Exception {
-//		if (getBeginEvent().getDate().compareTo(getEndEvent().getDate()) > 0) {
-//			throw new Exception("end date before begin date!!");
-//		}
-//		if (getBeginEvent().getDate().compareTo(getEndEvent().getDate()) == 0) {
-//			if (getBeginEvent().getTime().compareTo(getEndEvent().getTime()) > 0) {
-//				throw new Exception("end time before begin time!!");
-//			}
-//		}
-//		
-//	}
+	public void validate() throws Exception {
+		if(!endEvent.isAfter(beginEvent))
+			throw new Exception("end date is not after begin date!!");
+		
+		
+	}
 	
 	public boolean startsBefore(LocalDateTime time){
 		return time.isAfter(beginEvent);
@@ -82,7 +83,12 @@ public class CalendarEntry implements Comparable<CalendarEntry> {
 	}
 	
 	public boolean intersects(CalendarEntry entry) {
-		return beginEvent.isBefore(entry.getEndEvent()) && entry.getBeginEvent().isBefore(endEvent);
+		return (beginEvent.isBefore(entry.getEndEvent()) && entry.getBeginEvent().isBefore(endEvent)) || endEvent.isEqual(entry.beginEvent) || entry.endEvent.isEqual(beginEvent);
+		//return beginEvent.isBefore(entry.getEndEvent()) && entry.getBeginEvent().isBefore(endEvent);
+	}
+	
+	public static LocalDateTime parseLegacyDateTime(String startDate, String startTime){
+		return LocalDateTime.parse(startDate + startTime, formatter);
 	}
 
 };
