@@ -5,7 +5,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CollissionFreeCalendar extends Calendar {
-
+	
+	public CollissionFreeCalendar invert(LocalDateTime start, LocalDateTime end) throws Exception {
+		CollissionFreeCalendar result = new CollissionFreeCalendar();
+		
+		List<LocalDateTime> list = new ArrayList<>();
+		list.add(start);
+		for (CalendarEntry e : eventsToConsider(start, end)) {
+			list.add(e.getBeginEvent());
+			list.add(e.getEndEvent());
+		}
+		list.add(end);
+		
+		int i = 0;
+		while (i < list.size()) {
+			result.add(new CalendarEntry(list.get(i++), list.get(i++)));
+		}
+		
+		return result;
+	}
+	
+	private List<CalendarEntry> eventsToConsider(LocalDateTime start, LocalDateTime end) {
+		List<CalendarEntry> result = new ArrayList<>();
+		
+		for (CalendarEntry e : calendar) {
+			
+		}
+		
+		return result;
+	}
 	
 	@Override
 	public void add(CalendarEntry newEntry) throws Exception {
